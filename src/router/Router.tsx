@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Home } from "../components/pages/Home";
 import { Page404 } from "../components/pages/Page404";
@@ -5,7 +6,7 @@ import { PostCategory } from "../components/pages/PostCategory";
 import { PostDetail } from "../components/pages/PostDetail";
 import { Layout } from "../components/templates/Layout";
 
-export const Router = () => {
+export const Router = memo(() => {
   return (
     <Switch>
       <Route exact path="/">
@@ -18,7 +19,7 @@ export const Router = () => {
           <PostDetail />
         </Layout>
       </Route>
-      <Route exact path="/postCategory">
+      <Route exact path="/postCategory/:id">
         <Layout>
           <PostCategory />
         </Layout>
@@ -30,4 +31,4 @@ export const Router = () => {
       </Route>
     </Switch>
   );
-};
+});
