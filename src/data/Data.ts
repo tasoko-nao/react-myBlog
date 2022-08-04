@@ -13,7 +13,7 @@ export const Posts: Array<PostType> = [
         imgPath: "https://source.unsplash.com/random",
         content: "内容の一部が入ります",
         created: "2022/08/01",
-        category: [1, 2]
+        category: [1]
     },
     {
         id: 2,
@@ -21,7 +21,7 @@ export const Posts: Array<PostType> = [
         imgPath: "https://source.unsplash.com/random",
         content: "内容の一部が入ります",
         created: "2022/08/01",
-        category: [1]
+        category: [1, 2]
     },
     {
         id: 3,
@@ -29,7 +29,7 @@ export const Posts: Array<PostType> = [
         imgPath: "https://source.unsplash.com/random",
         content: "内容の一部が入ります",
         created: "2022/08/01",
-        category: [1, 2, 4]
+        category: [1, 2, 3, 4]
     },
 ];
 

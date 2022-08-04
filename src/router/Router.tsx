@@ -19,7 +19,7 @@ export const Router = memo(() => {
           <PostDetail />
         </Layout>
       </Route>
-      <Route exact path="/postCategory/:id">
+      <Route exact path="/postCategory">
         <Layout>
           <PostCategory />
         </Layout>

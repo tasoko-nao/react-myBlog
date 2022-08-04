@@ -1,4 +1,4 @@
-import { memo, ReactNode, VFC } from "react";
+import { memo, ReactNode,  VFC } from "react";
 import { Footer } from "../organisms/layout/Footer";
 import { Header } from "../organisms/layout/Header";
 
