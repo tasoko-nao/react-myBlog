@@ -4,30 +4,30 @@ import { Home } from "../components/pages/Home";
 import { Page404 } from "../components/pages/Page404";
 import { PostCategory } from "../components/pages/PostCategory";
 import { PostDetail } from "../components/pages/PostDetail";
-import { Layout } from "../components/templates/Layout";
+import { MultiColumnLayout } from "../components/tems/MultiColumnLayout";
 
 export const Router = memo(() => {
   return (
     <Switch>
       <Route exact path="/">
-        <Layout>
+        <MultiColumnLayout>
           <Home />
-        </Layout>
+        </MultiColumnLayout>
       </Route>
-      <Route exact path="/postDetail">
-        <Layout>
+      <Route exact path="/postDetail/:id">
+        <MultiColumnLayout>
           <PostDetail />
-        </Layout>
+        </MultiColumnLayout>
       </Route>
       <Route exact path="/postCategory">
-        <Layout>
+        <MultiColumnLayout>
           <PostCategory />
-        </Layout>
+        </MultiColumnLayout>
       </Route>
       <Route path="*">
-        <Layout>
+        <MultiColumnLayout>
           <Page404 />
-        </Layout>
+        </MultiColumnLayout>
       </Route>
     </Switch>
   );

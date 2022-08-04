@@ -1,6 +1,5 @@
-import { Container, Flex, Stack, Text } from "@chakra-ui/react";
+import { Stack, Text } from "@chakra-ui/react";
 import { memo, useContext, useEffect, VFC } from "react";
-import { Side } from "../organisms/layout/Side";
 import { PostsContext } from "../../providers/PostsProvider";
 import { PostCard } from "../molecules/PostCard";
 import { useLocation } from "react-router-dom";
@@ -20,18 +19,16 @@ export const PostCategory: VFC = memo(() => {
   });
   useEffect(() => window.scroll(0, 0), [Category]);
   return (
-    <Container w="100%" maxW="1100px" bg="white">
-      <Flex direction={{ base: "column", lg: "row" }} gap="20px">
-        <Stack flex="1" spacing="6">
-          <Text as="h2" fontSize="2xl">
-            カテゴリ: {Category.name}
-          </Text>
-          {filteredPosts.map((post) => (
-            <PostCard post={post} key={post.id} />
-          ))}
-        </Stack>
-        <Side />
-      </Flex>
-    </Container>
+    <Stack flex="1" spacing="6">
+      <Text as="h2" fontSize="2xl">
+        カテゴリ: {Category.name}
+      </Text>
+      {filteredPosts.length === 0 ?
+        <Text>投稿が一件もありません</Text> :
+        filteredPosts.map((post) => (
+          <PostCard post={post} key={post.id} />
+        ))
+      }
+    </Stack>
   );
 });

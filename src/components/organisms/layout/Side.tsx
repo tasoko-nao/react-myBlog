@@ -19,7 +19,7 @@ export const Side = memo(() => {
     <Box w={{ lg: "300px" }} bg="gray.200" px="10px" borderRadius="10px">
       <Stack align="center" my="20px">
         <Img
-          src="https://source.unsplash.com/random"
+          src="https://source.unsplash.com/sk-9HWnDnZk"
           boxSize="200px"
           borderRadius="full"
           objectFit="cover"
