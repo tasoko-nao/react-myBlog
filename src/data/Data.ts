@@ -11,7 +11,7 @@ export const Posts: Array<PostType> = [
         id: 1,
         title: "タイトル1",
         imgPath: "https://source.unsplash.com/1DoCgbgtoLs",
-        content: "内容の一部が入ります",
+        content: "内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。",
         created: "2022/08/01",
         category: [1]
     },
@@ -19,7 +19,7 @@ export const Posts: Array<PostType> = [
         id: 2,
         title: "タイトル2",
         imgPath: "https://source.unsplash.com/HeQswh6F3Uw",
-        content: "内容の一部が入ります",
+        content: "内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。",
         created: "2022/08/01",
         category: [1, 2]
     },
@@ -27,7 +27,7 @@ export const Posts: Array<PostType> = [
         id: 3,
         title: "タイトル3",
         imgPath: "https://source.unsplash.com/RFCFhhl3xfQ",
-        content: "内容の一部が入ります",
+        content: "内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。",
         created: "2022/08/01",
         category: [1, 2, 3, 4]
     },
@@ -35,7 +35,7 @@ export const Posts: Array<PostType> = [
         id: 4,
         title: "タイトル4",
         imgPath: "https://source.unsplash.com/BDpIYAKh9VM",
-        content: "内容の一部が入ります",
+        content: "内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。",
         created: "2022/08/01",
         category: [1, 2, 4]
     },
@@ -43,7 +43,7 @@ export const Posts: Array<PostType> = [
         id: 5,
         title: "タイトル5",
         imgPath: "https://source.unsplash.com/zY3mjsIvg0U",
-        content: "内容の一部が入ります",
+        content: "内容が入ります",
         created: "2022/08/01",
         category: [1, 3]
     },
@@ -56,22 +56,22 @@ export type CategoryType = {
 export const Categories: Array<CategoryType> = [
     {
         id: 1,
-        name: "HTML",
+        name: "旅行",
     },
     {
         id: 2,
-        name: "CSS",
+        name: "海外",
     },
     {
         id: 3,
-        name: "JavaScript",
+        name: "温泉",
     },
     {
         id: 4,
-        name: "Python",
+        name: "絶景",
     },
     {
         id: 5,
-        name: "Vue",
+        name: "料理",
     }
 ]

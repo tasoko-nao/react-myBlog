@@ -16,7 +16,13 @@ export const Side = memo(() => {
     history.push({ pathname: "/postCategory", state: { Category: category } });
   };
   return (
-    <Box w={{ lg: "300px" }} bg="gray.200" px="10px" borderRadius="10px">
+    <Box
+      w={{ lg: "300px" }}
+      bg="gray.200"
+      px="10px"
+      borderRadius="10px"
+      position="relative"
+    >
       <Stack align="center" my="20px">
         <Img
           src="https://source.unsplash.com/sk-9HWnDnZk"
@@ -29,7 +35,7 @@ export const Side = memo(() => {
         </Text>
         <Text>開発経歴：react3年</Text>
       </Stack>
-      <Box my="40px" position="sticky">
+      <Box my="40px" position="sticky" top="20px">
         <Text fontSize="1.2rem" fontWeight="bolder">
           カテゴリ
         </Text>

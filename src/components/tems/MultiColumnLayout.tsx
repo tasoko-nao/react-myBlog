@@ -1,7 +1,8 @@
-import { Container, Flex } from "@chakra-ui/react";
+import { Box, Container, Flex } from "@chakra-ui/react";
 import { memo, ReactNode, VFC } from "react";
 import { Footer } from "../organisms/layout/Footer";
 import { Header } from "../organisms/layout/Header";
+import { Recommend } from "../organisms/layout/Recommend";
 import { Side } from "../organisms/layout/Side";
 
 type Props = {
@@ -15,7 +16,10 @@ export const MultiColumnLayout: VFC<Props> = memo((props) => {
       <Header />
       <Container w="100%" maxW="1100px" bg="white">
         <Flex direction={{ base: "column", lg: "row" }} gap="20px">
-          {children}
+          <Box flex="1">
+            {children}
+            <Recommend />
+          </Box>
           <Side />
         </Flex>
       </Container>

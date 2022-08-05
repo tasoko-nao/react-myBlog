@@ -1,21 +1,20 @@
-import { Box, Flex, Img, Link, Stack, Text } from "@chakra-ui/react";
+import { Flex, Link, Stack, Text } from "@chakra-ui/react";
 import { memo, VFC } from "react";
-import { useHistory } from "react-router-dom";
 import { PostType } from "../../data/Data";
 import { Categories } from "../../data/Data";
+import { useLinkPostDetail } from "../../hooks/useLinkPostDetail";
 import { CategoryTag } from "../atoms/CategoryTag";
+import { PostCardImage } from "../atoms/PostCardImage";
 
 type Props = {
   post: PostType;
 };
 export const PostCard: VFC<Props> = memo((props) => {
-  const history = useHistory()
+  const { LinkDetail } = useLinkPostDetail();
+
   const {
     post: { id, title, imgPath, content, created, category },
   } = props;
-  const onClickDetail = (postId: number) => {
-    history.push(`/postDetail/${postId}`)
-  }
   return (
     <Stack border="1px solid gray" borderRadius="10px" overflow="hidden">
       <Text
@@ -26,31 +25,22 @@ export const PostCard: VFC<Props> = memo((props) => {
         color="white"
         p="0.5rem"
       >
-        <Link onClick={() => onClickDetail(id)}>
-          {title}
-        </Link>
+        <Link onClick={() => LinkDetail(id)}>{title}</Link>
       </Text>
-      <Flex padding="1rem">
-        <Link maxW="300px" width="100%" onClick={() => onClickDetail(id)}>
-          <Img
-            src={imgPath}
-            alt="プロフィール画像"
-            width="100%"
-            height="200px"
-            objectFit="cover"
-            flex="1"
-          />
+      <Flex padding="1rem" wrap="wrap">
+        <Link flex="1" width="100%" onClick={() => LinkDetail(id)}>
+          <PostCardImage imgPath={imgPath} />
         </Link>
-        <Box flex="1" margin="1rem">
+        <Stack flex="1" margin="1rem" spacing="4">
           <Text>{content}</Text>
           <Text>{created}</Text>
           <Flex gap="3" wrap="wrap">
             {category.map((id) => {
               const categoryName = Categories.find((e) => e.id === id)?.name;
-              return <CategoryTag key={id} categoryName={categoryName} />
+              return <CategoryTag key={id} categoryName={categoryName} />;
             })}
           </Flex>
-        </Box>
+        </Stack>
       </Flex>
     </Stack>
   );
