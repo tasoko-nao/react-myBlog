@@ -7,7 +7,7 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import { memo } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Categories, CategoryType } from "../../../data/Data";
 
 export const Side = memo(() => {
@@ -54,6 +54,9 @@ export const Side = memo(() => {
             </ListItem>
           ))}
         </UnorderedList>
+        <Text align="right" my="1em" fontWeight="bold">
+          <Link to="/login">ログイン</Link>
+        </Text>
       </Box>
     </Box>
   );

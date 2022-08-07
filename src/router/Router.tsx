@@ -1,9 +1,11 @@
 import { memo } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Home } from "../components/pages/Home";
+import { Login } from "../components/pages/Login";
 import { Page404 } from "../components/pages/Page404";
 import { PostCategory } from "../components/pages/PostCategory";
 import { PostDetail } from "../components/pages/PostDetail";
+import { Layout } from "../components/tems/Layout";
 import { MultiColumnLayout } from "../components/tems/MultiColumnLayout";
 
 export const Router = memo(() => {
@@ -23,6 +25,11 @@ export const Router = memo(() => {
         <MultiColumnLayout>
           <PostCategory />
         </MultiColumnLayout>
+      </Route>
+      <Route path="/login">
+        <Layout>
+          <Login />
+        </Layout>
       </Route>
       <Route path="*">
         <MultiColumnLayout>
