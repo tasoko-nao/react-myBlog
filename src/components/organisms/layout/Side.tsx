@@ -6,15 +6,17 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
-import { memo } from "react";
+import { memo, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Categories, CategoryType } from "../../../data/Data";
+import { PostsContext } from "../../../providers/PostsProvider";
 
 export const Side = memo(() => {
   const history = useHistory();
   const categoryLink = (category: CategoryType) => {
     history.push({ pathname: "/postCategory", state: { Category: category } });
   };
+  const { loginUser } = useContext(PostsContext);
   return (
     <Box
       w={{ lg: "300px" }}
@@ -54,6 +56,7 @@ export const Side = memo(() => {
             </ListItem>
           ))}
         </UnorderedList>
+        <Text>{loginUser ? loginUser.name : "ゲスト"}さん</Text>
         <Text align="right" my="1em" fontWeight="bold">
           <Link to="/login">ログイン</Link>
         </Text>

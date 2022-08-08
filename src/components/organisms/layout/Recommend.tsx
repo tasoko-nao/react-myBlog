@@ -22,7 +22,7 @@ export const Recommend: VFC = memo(() => {
       </Text>
       <Flex flexWrap="wrap" gap="20px">
         {recommendPosts.map((post) => (
-          <PostCardMin post={post} />
+          <PostCardMin post={post} key={post.id} />
         ))}
       </Flex>
     </Box>

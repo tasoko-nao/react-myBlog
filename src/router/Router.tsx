@@ -12,9 +12,9 @@ export const Router = memo(() => {
   return (
     <Switch>
       <Route exact path="/">
-        <MultiColumnLayout>
+        <Layout>
           <Home />
-        </MultiColumnLayout>
+        </Layout>
       </Route>
       <Route exact path="/postDetail/:id">
         <MultiColumnLayout>

@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Container, Flex } from "@chakra-ui/react";
 import { memo, ReactNode, VFC } from "react";
 import { Footer } from "../organisms/layout/Footer";
 import { Header } from "../organisms/layout/Header";
@@ -12,7 +12,9 @@ export const Layout: VFC<Props> = memo((props) => {
   return (
     <Flex direction="column" minH="100vh" justify="space-between">
       <Header />
-      {children}
+      <Container w="100%" maxW="1100px" bg="white">
+        {children}
+      </Container>
       <Footer />
     </Flex>
   );
