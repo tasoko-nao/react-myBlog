@@ -10,16 +10,18 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-import { ChangeEvent, memo, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, memo, useContext, useEffect, useMemo, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { Categories } from "../../../data/Data";
 import { usePostAdd } from "../../../hooks/usePostAdd";
+import { usePostEdit } from "../../../hooks/usePostEdit";
+import { PostsContext } from "../../../providers/PostsProvider";
 export const PostAdd = memo(() => {
   useEffect(() => window.scroll(0, 0), []);
   const [title, setTitle] = useState("");
   const [imgPath, setImgPath] = useState("");
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState<Array<number>>([1]);
+  const [category, setCategory] = useState<Array<number>>([]);
 
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -33,15 +35,30 @@ export const PostAdd = memo(() => {
   const onChangeCategory = (e: Array<number>) => {
     setCategory(e.map(Number));
   };
-  const { state } = useLocation<any>();
-  // const post = state ? state.post : null;
-  // var post = null;
-  var post = useMemo(() => (state ? state.post : null), [state]);
-  const { AddPost } = usePostAdd();
   const history = useHistory();
+  const { state } = useLocation<any>();
+  const post = useMemo(() => (state ? state.post : null), [state]);
+  const { AddPost } = usePostAdd();
+  const { EditPost } = usePostEdit()
+
+  const { posts } = useContext(PostsContext)
+  useEffect(() => {
+    if (post) {
+      setTitle(post.title)
+      setImgPath(post.imgPath)
+      setContent(post.content)
+      setCategory(post.category)
+    }
+  }, [post])
+
+  // 保存時の処理
   const onSubmitAddPost = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    AddPost(title, imgPath, content, category);
+    if (posts.find((savePost) => savePost.id === post?.id)) {
+      EditPost(post.id, title, imgPath, content, category);
+    } else {
+      AddPost(title, imgPath, content, category);
+    }
     history.push("/");
   };
 
@@ -53,12 +70,12 @@ export const PostAdd = memo(() => {
       <Stack as="form" spacing="6" onSubmit={onSubmitAddPost}>
         <FormControl>
           <FormLabel>タイトル</FormLabel>
-          <Input value={post?.title} required={true} onChange={onChangeTitle} />
+          <Input value={title} required={true} onChange={onChangeTitle} />
         </FormControl>
         <FormControl>
           <FormLabel>キャッチ画像</FormLabel>
           <Input
-            value={post?.imgPath}
+            value={imgPath}
             required={true}
             placeholder="パスを入力"
             onChange={onChangeImg}
@@ -67,7 +84,7 @@ export const PostAdd = memo(() => {
         <FormControl>
           <FormLabel>内容</FormLabel>
           <Textarea
-            value={post?.content}
+            value={content}
             required={true}
             rows={10}
             onChange={onChangeContent}
@@ -76,8 +93,8 @@ export const PostAdd = memo(() => {
         <FormControl>
           <FormLabel>カテゴリ</FormLabel>
           <CheckboxGroup
-            colorScheme="green"
-            defaultValue={post ? post.category.map(String) : ["1"]}
+            colorScheme="orange"
+            value={category.map(String)}
             onChange={onChangeCategory}
           >
             {Categories.map((category) => (
