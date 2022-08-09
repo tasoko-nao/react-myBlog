@@ -2,6 +2,7 @@ import { Flex, Link, Stack, Text } from "@chakra-ui/react";
 import { memo, VFC } from "react";
 import { PostType } from "../../data/Data";
 import { Categories } from "../../data/Data";
+import { UserList } from "../../data/UserData";
 import { useLinkPostDetail } from "../../hooks/useLinkPostDetail";
 import { CategoryTag } from "../atoms/CategoryTag";
 import { PostCardImage } from "../atoms/PostCardImage";
@@ -11,9 +12,8 @@ type Props = {
 };
 export const PostCard: VFC<Props> = memo((props) => {
   const { LinkDetail } = useLinkPostDetail();
-
   const {
-    post: { id, title, imgPath, content, created, category },
+    post: { id, userId, title, imgPath, content, created, category },
   } = props;
   return (
     <Stack border="1px solid gray" borderRadius="10px" overflow="hidden">
@@ -33,13 +33,14 @@ export const PostCard: VFC<Props> = memo((props) => {
         </Link>
         <Stack flex="1" margin="1rem" spacing="4">
           <Text>{content}</Text>
-          <Text>{created}</Text>
           <Flex gap="3" wrap="wrap">
             {category.map((id) => {
               const categoryName = Categories.find((e) => e.id === id)?.name;
               return <CategoryTag key={id} categoryName={categoryName} />;
             })}
           </Flex>
+          <Text>{created}</Text>
+          <Text>{UserList.find((user) => user.id === userId)?.name}</Text>
         </Stack>
       </Flex>
     </Stack>
