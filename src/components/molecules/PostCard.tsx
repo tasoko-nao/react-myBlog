@@ -39,8 +39,10 @@ export const PostCard: VFC<Props> = memo((props) => {
               return <CategoryTag key={id} categoryName={categoryName} />;
             })}
           </Flex>
-          <Text>{created}</Text>
-          <Text>{UserList.find((user) => user.id === userId)?.name}</Text>
+          <Text fontSize="sm">{created}</Text>
+          <Text fontSize="sm">
+            {UserList.find((user) => user.id === userId)?.name}
+          </Text>
         </Stack>
       </Flex>
     </Stack>

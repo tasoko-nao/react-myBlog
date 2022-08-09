@@ -33,7 +33,7 @@ export const Side = memo(() => {
     >
       <Stack align="center" my="20px">
         <Img
-          src="https://source.unsplash.com/sk-9HWnDnZk"
+          src="https://source.unsplash.com/sSw9_Sd8hR4"
           boxSize="200px"
           borderRadius="full"
           objectFit="cover"
@@ -41,7 +41,7 @@ export const Side = memo(() => {
         <Text fontSize="2xl" fontWeight="bold">
           スーパーマン
         </Text>
-        <Text>開発経歴：react3年</Text>
+        <Text>旅行が大好きなおじさん</Text>
       </Stack>
       <Box my="40px" position="sticky" top="20px">
         <Text fontSize="1.2rem" fontWeight="bolder">

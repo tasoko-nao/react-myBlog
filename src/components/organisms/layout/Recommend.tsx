@@ -21,9 +21,9 @@ export const Recommend: VFC = memo(() => {
         おすすめ記事
       </Text>
       <Flex flexWrap="wrap" gap="20px">
-        {recommendPosts.map((post) => (
-          <PostCardMin post={post} key={post.id} />
-        ))}
+        {recommendPosts.map(
+          (post) => post && <PostCardMin post={post} key={post.id} />
+        )}
       </Flex>
     </Box>
   );

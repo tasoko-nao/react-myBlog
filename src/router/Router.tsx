@@ -8,7 +8,8 @@ import { PostCategory } from "../components/pages/PostCategory";
 import { PostDetail } from "../components/pages/PostDetail";
 import { Layout } from "../components/tems/Layout";
 import { MultiColumnLayout } from "../components/tems/MultiColumnLayout";
-import { LoginedRoute } from "./LoginedRoute";
+import { AdminRoute } from "./AdRoute";
+// import { LoginedRoute } from "./LoginedRoute";
 
 export const Router = memo(() => {
   return (
@@ -28,11 +29,11 @@ export const Router = memo(() => {
       </Route>
 
       {/* 新規投稿 */}
-      <LoginedRoute path="/postAdd">
+      <AdminRoute path="/postAdd">
         <Layout>
           <PostAdd />
         </Layout>
-      </LoginedRoute>
+      </AdminRoute>
 
       {/* 投稿詳細 */}
       <Route exact path="/postDetail/:id">

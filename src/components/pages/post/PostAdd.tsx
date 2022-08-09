@@ -10,16 +10,16 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-import { ChangeEvent, memo, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { ChangeEvent, memo, useEffect, useMemo, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import { Categories } from "../../../data/Data";
 import { usePostAdd } from "../../../hooks/usePostAdd";
 export const PostAdd = memo(() => {
+  useEffect(() => window.scroll(0, 0), []);
   const [title, setTitle] = useState("");
   const [imgPath, setImgPath] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState<Array<number>>([1]);
-  useEffect(() => window.scroll(0, 0), []);
 
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -33,6 +33,10 @@ export const PostAdd = memo(() => {
   const onChangeCategory = (e: Array<number>) => {
     setCategory(e.map(Number));
   };
+  const { state } = useLocation<any>();
+  // const post = state ? state.post : null;
+  // var post = null;
+  var post = useMemo(() => (state ? state.post : null), [state]);
   const { AddPost } = usePostAdd();
   const history = useHistory();
   const onSubmitAddPost = (e: ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +44,7 @@ export const PostAdd = memo(() => {
     AddPost(title, imgPath, content, category);
     history.push("/");
   };
+
   return (
     <Box>
       <Heading as="h2" my="1em">
@@ -48,11 +53,12 @@ export const PostAdd = memo(() => {
       <Stack as="form" spacing="6" onSubmit={onSubmitAddPost}>
         <FormControl>
           <FormLabel>タイトル</FormLabel>
-          <Input required={true} onChange={onChangeTitle} />
+          <Input value={post?.title} required={true} onChange={onChangeTitle} />
         </FormControl>
         <FormControl>
           <FormLabel>キャッチ画像</FormLabel>
           <Input
+            value={post?.imgPath}
             required={true}
             placeholder="パスを入力"
             onChange={onChangeImg}
@@ -60,13 +66,18 @@ export const PostAdd = memo(() => {
         </FormControl>
         <FormControl>
           <FormLabel>内容</FormLabel>
-          <Textarea required={true} rows={10} onChange={onChangeContent} />
+          <Textarea
+            value={post?.content}
+            required={true}
+            rows={10}
+            onChange={onChangeContent}
+          />
         </FormControl>
         <FormControl>
           <FormLabel>カテゴリ</FormLabel>
           <CheckboxGroup
             colorScheme="green"
-            defaultValue={["1"]}
+            defaultValue={post ? post.category.map(String) : ["1"]}
             onChange={onChangeCategory}
           >
             {Categories.map((category) => (

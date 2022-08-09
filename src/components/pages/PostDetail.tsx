@@ -1,7 +1,8 @@
 import { Flex, Img, Stack, Text } from "@chakra-ui/react";
 import { memo, useContext, useEffect, VFC } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Categories } from "../../data/Data";
+import { usePostDelete } from "../../hooks/usePostDelete";
 import { PostsContext } from "../../providers/PostsProvider";
 import { CategoryTag } from "../atoms/CategoryTag";
 
@@ -10,11 +11,24 @@ interface StateType {
 }
 
 export const PostDetail: VFC = memo(() => {
+  const history = useHistory();
   const { id } = useParams<StateType>();
   const postId = Number(id);
   const { posts, loginUser } = useContext(PostsContext);
   const post = posts.find((e) => e.id === postId);
+
   useEffect(() => window.scroll(0, 0), [id]);
+
+  // 削除
+  const { deletePost } = usePostDelete();
+  const onClickDelete = () => {
+    deletePost(postId);
+    history.push("/");
+  };
+  // 編集
+  const onClickEdit = () =>
+    history.push({ pathname: "/postAdd", state: { post } });
+
   return (
     <Stack flex="1" spacing="6">
       <Text
@@ -36,10 +50,18 @@ export const PostDetail: VFC = memo(() => {
       />
       {loginUser?.isAdmin && (
         <Flex justify="flex-end" gap="1em" fontWeight="bold">
-          <Text color="blue.600" _hover={{ cursor: "pointer" }}>
+          <Text
+            color="blue.600"
+            _hover={{ cursor: "pointer" }}
+            onClick={() => onClickEdit()}
+          >
             編集
           </Text>
-          <Text color="red.600" _hover={{ cursor: "pointer" }}>
+          <Text
+            color="red.600"
+            _hover={{ cursor: "pointer" }}
+            onClick={() => onClickDelete()}
+          >
             削除
           </Text>
         </Flex>

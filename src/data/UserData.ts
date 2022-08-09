@@ -27,7 +27,7 @@ export const UserList: Array<UserType> = [
     {
         id: "10",
         password: "10",
-        name: "admin-user",
+        name: "super-man",
         isAdmin: true
     }
 ]
