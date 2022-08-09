@@ -17,18 +17,21 @@ export const Login: VFC = memo(() => {
   const onChangeUserId = (e: ChangeEvent<HTMLInputElement>) => {
     setUserId(e.target.value);
   };
-
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
   const { onClickLogin } = useAuth();
+  const onSubmitLogin = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    onClickLogin(userId, password);
+  };
 
   return (
     <Container>
       <Heading as="h2" fontSize="3xl" fontFamily="inherit">
         ログイン
       </Heading>
-      <Stack as="form" my="40px" spacing="20px">
+      <Stack as="form" onSubmit={onSubmitLogin} my="40px" spacing="20px">
         <FormControl>
           <FormLabel>ユーザーID</FormLabel>
           <Input
@@ -46,9 +49,7 @@ export const Login: VFC = memo(() => {
           />
         </FormControl>
         <FormControl>
-          <Button onClick={() => onClickLogin(userId, password)}>
-            ログイン
-          </Button>
+          <Button type="submit">ログイン</Button>
         </FormControl>
       </Stack>
     </Container>

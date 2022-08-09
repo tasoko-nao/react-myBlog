@@ -18,7 +18,7 @@ export const Home: VFC = memo(() => {
             {posts.map((post) => (
               <PostCard post={post} key={post.id} />
             ))}
-          </Stack>{" "}
+          </Stack>
           <Recommend />
         </Box>
         <Side />
