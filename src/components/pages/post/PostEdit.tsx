@@ -36,7 +36,7 @@ export const PostAdd = memo(() => {
   const history = useHistory();
   const { state } = useLocation<any>();
   const post = useMemo(() => (state ? state.post : null), [state]);
-  const { savePost } = usePostSave();
+  const { postSave } = usePostSave();
 
   useEffect(() => {
     if (post) {
@@ -49,7 +49,7 @@ export const PostAdd = memo(() => {
   // 保存時の処理
   const onSubmitAddPost = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    savePost(title, imgPath, content, category, post?.id);
+    postSave(title, imgPath, content, category, post?.id);
     history.push("/");
   };
 

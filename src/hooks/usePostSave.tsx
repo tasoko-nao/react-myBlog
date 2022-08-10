@@ -8,7 +8,7 @@ export const usePostSave = () => {
   const postIds = posts.map((post) => post.id);
   const maxPostId = Math.max.apply(null, postIds);
 
-  const savePost = (
+  const postSave = (
     title: string,
     imgPath: string,
     content: string,
@@ -40,5 +40,5 @@ export const usePostSave = () => {
       setPosts([...posts, post]);
     }
   };
-  return { savePost };
+  return { postSave };
 };
