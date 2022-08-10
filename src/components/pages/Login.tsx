@@ -8,6 +8,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { ChangeEvent, memo, useState, VFC } from "react";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 export const Login: VFC = memo(() => {
@@ -20,10 +21,14 @@ export const Login: VFC = memo(() => {
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
+  const location = useLocation();
+  /* @ts-ignore */
+  const { from } = location.state || { from: { pathname: "/" } };
+
   const { onClickLogin } = useAuth();
   const onSubmitLogin = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    onClickLogin(userId, password);
+    onClickLogin(userId, password, from.pathname);
   };
 
   return (

@@ -13,7 +13,7 @@ export const Posts: Array<PostType> = [
         userId: "10",
         title: "タイトル1",
         imgPath: "https://source.unsplash.com/iEDuhQbWM_I",
-        content: "内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。",
+        content: "内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。",
         created: "2022/08/01",
         category: [1]
     },
@@ -49,7 +49,7 @@ export const Posts: Array<PostType> = [
         userId: "10",
         title: "タイトル5",
         imgPath: "https://source.unsplash.com/qMAcYJ1Olvo",
-        content: "内容が入ります",
+        content: "内容が入ります内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。内容が入ります。",
         created: "2022/08/01",
         category: [1, 3]
     },

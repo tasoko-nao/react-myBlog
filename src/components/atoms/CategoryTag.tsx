@@ -1,12 +1,12 @@
-import { Text } from "@chakra-ui/react"
-import { VFC } from "react"
+import { Text } from "@chakra-ui/react";
+import { memo, VFC } from "react";
 
 type Props = {
-  categoryName: string | undefined
-}
+  categoryName: string | undefined;
+};
 
-export const CategoryTag: VFC<Props> = (props) => {
-  const { categoryName } = props
+export const CategoryTag: VFC<Props> = memo((props) => {
+  const { categoryName } = props;
   return (
     <Text
       bg="orange.400"
@@ -17,5 +17,5 @@ export const CategoryTag: VFC<Props> = (props) => {
     >
       {categoryName}
     </Text>
-  )
-}
+  );
+});

@@ -69,7 +69,7 @@ const Container = styled.div`
 const SliderWrapper = styled.div`
   width: calc(100% - 80px);
   padding-bottom: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
   .slick-prev:before,
   .slick-next:before {
     position: relative;

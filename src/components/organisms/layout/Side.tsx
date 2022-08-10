@@ -11,6 +11,7 @@ import { memo, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Categories, CategoryType } from "../../../data/Data";
 import { PostsContext } from "../../../providers/PostsProvider";
+import { SectionTitle } from "../../atoms/SectionTitle";
 
 export const Side = memo(() => {
   const history = useHistory();
@@ -23,6 +24,7 @@ export const Side = memo(() => {
     alert("ログアウトしました");
     window.scroll(0, 0);
   };
+  const isAdmin = loginUser?.isAdmin;
   return (
     <Box
       w={{ lg: "300px" }}
@@ -44,9 +46,7 @@ export const Side = memo(() => {
         <Text>旅行が大好きなおじさん</Text>
       </Stack>
       <Box my="40px" position="sticky" top="20px">
-        <Text fontSize="1.2rem" fontWeight="bolder">
-          カテゴリ
-        </Text>
+        <SectionTitle>カテゴリ</SectionTitle>
         <UnorderedList my="1rem" mx="0">
           {Categories.map((category) => (
             <ListItem
@@ -64,9 +64,11 @@ export const Side = memo(() => {
         </UnorderedList>
         <Flex justify="space-between">
           <Text>{loginUser ? loginUser.name : "ゲスト"}さん</Text>
-          <Text color="blue.600">
-            <Link to="/postAdd">新規投稿</Link>
-          </Text>
+          {isAdmin && (
+            <Text color="blue.600">
+              <Link to="/postAdd">新規投稿</Link>
+            </Text>
+          )}
         </Flex>
         <Box textAlign="right" my="1em" fontWeight="bold">
           {loginUser ? (

@@ -32,7 +32,13 @@ export const PostCard: VFC<Props> = memo((props) => {
           <PostCardImage imgPath={imgPath} />
         </Link>
         <Stack flex="1" margin="1rem" spacing="4">
-          <Text>{content}</Text>
+          <Text
+            display="-webkit-box"
+            overflow="hidden"
+            style={{ WebkitBoxOrient: "vertical", WebkitLineClamp: "2" }}
+          >
+            {content}
+          </Text>
           <Flex gap="3" wrap="wrap">
             {category.map((id) => {
               const categoryName = Categories.find((e) => e.id === id)?.name;

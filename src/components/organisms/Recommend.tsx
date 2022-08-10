@@ -1,6 +1,7 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { memo, useContext, VFC } from "react";
 import { PostsContext } from "../../providers/PostsProvider";
+import { SectionTitle } from "../atoms/SectionTitle";
 import { PostCardMin } from "../molecules/PostCardMin";
 
 export const Recommend: VFC = memo(() => {
@@ -17,9 +18,7 @@ export const Recommend: VFC = memo(() => {
       p={{ base: "20px", md: "40px" }}
       borderRadius="10px"
     >
-      <Text fontSize="1.2rem" fontWeight="bold" pb="1rem">
-        おすすめ記事
-      </Text>
+      <SectionTitle>おすすめ記事</SectionTitle>
       <Flex flexWrap="wrap" gap="20px">
         {recommendPosts.map(
           (post) => post && <PostCardMin post={post} key={post.id} />

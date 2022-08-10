@@ -2,16 +2,22 @@ import { useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { PostsContext } from "../providers/PostsProvider";
 
-export const AdminRoute = (props: any) => {
+export const AdminRoute = ({ children, ...rest }: any) => {
   const { loginUser } = useContext(PostsContext);
-  // const isLogin = typeof loginUser !== "undefined" ? true : false;
   const isAdminUser = loginUser && loginUser.isAdmin;
-  return isAdminUser ? (
-    <Route {...props} />
-  ) : (
-    <Redirect to={{ pathname: "/login" }} />
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        isAdminUser ? (
+          children
+        ) : (
+          <Redirect to={{ pathname: "/login", state: { from: location } }} />
+        )
+      }
+    />
   );
-  // return isLogin ? (
+  // return isAdminUser ? (
   //   <Route {...props} />
   // ) : (
   //   <Redirect to={{ pathname: "/login" }} />
