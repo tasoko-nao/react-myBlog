@@ -2,7 +2,7 @@ import { Box, Container, Flex } from "@chakra-ui/react";
 import { memo, ReactNode, VFC } from "react";
 import { Footer } from "../organisms/layout/Footer";
 import { Header } from "../organisms/layout/Header";
-import { Recommend } from "../organisms/layout/Recommend";
+import { Recommend } from "../organisms/Recommend";
 import { Side } from "../organisms/layout/Side";
 
 type Props = {

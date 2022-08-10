@@ -10,12 +10,10 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-import { ChangeEvent, memo, useContext, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, memo, useEffect, useMemo, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { Categories } from "../../../data/Data";
-import { usePostAdd } from "../../../hooks/usePostAdd";
-import { usePostEdit } from "../../../hooks/usePostEdit";
-import { PostsContext } from "../../../providers/PostsProvider";
+import { usePostSave } from "../../../hooks/usePostSave";
 export const PostAdd = memo(() => {
   useEffect(() => window.scroll(0, 0), []);
   const [title, setTitle] = useState("");
@@ -38,27 +36,20 @@ export const PostAdd = memo(() => {
   const history = useHistory();
   const { state } = useLocation<any>();
   const post = useMemo(() => (state ? state.post : null), [state]);
-  const { AddPost } = usePostAdd();
-  const { EditPost } = usePostEdit()
+  const { savePost } = usePostSave();
 
-  const { posts } = useContext(PostsContext)
   useEffect(() => {
     if (post) {
-      setTitle(post.title)
-      setImgPath(post.imgPath)
-      setContent(post.content)
-      setCategory(post.category)
+      setTitle(post.title);
+      setImgPath(post.imgPath);
+      setContent(post.content);
+      setCategory(post.category);
     }
-  }, [post])
-
+  }, [post]);
   // 保存時の処理
   const onSubmitAddPost = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (posts.find((savePost) => savePost.id === post?.id)) {
-      EditPost(post.id, title, imgPath, content, category);
-    } else {
-      AddPost(title, imgPath, content, category);
-    }
+    savePost(title, imgPath, content, category, post?.id);
     history.push("/");
   };
 

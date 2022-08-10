@@ -7,7 +7,9 @@ export const usePostDelete = () => {
     if (window.confirm("削除してよろしいですか？")) {
       const newPosts = posts.filter((post) => post.id !== postId);
       setPosts(newPosts);
-      alert("削除しました");
+      return true;
+    } else {
+      return false;
     }
   };
   return { deletePost };

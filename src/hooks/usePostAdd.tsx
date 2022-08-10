@@ -5,6 +5,8 @@ import { PostsContext } from "../providers/PostsProvider";
 export const usePostAdd = () => {
   const { posts, setPosts, loginUser } = useContext(PostsContext);
   const today = new Date();
+  const postIds = posts.map((post) => post.id);
+  const postId = Math.max.apply(null, postIds);
 
   const AddPost = (
     title: string,
@@ -13,7 +15,7 @@ export const usePostAdd = () => {
     category: Array<number>
   ) => {
     const post: PostType = {
-      id: posts.length + 1,
+      id: postId + 1,
       /* @ts-ignore ページがログイン必須のため */
       userId: loginUser.id,
       title,

@@ -22,8 +22,7 @@ export const PostDetail: VFC = memo(() => {
   // 削除
   const { deletePost } = usePostDelete();
   const onClickDelete = () => {
-    deletePost(postId);
-    history.push("/");
+    deletePost(postId) && history.push("/");
   };
   // 編集
   const onClickEdit = () =>

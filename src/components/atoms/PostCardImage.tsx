@@ -11,7 +11,7 @@ export const PostCardImage: VFC<Props> = memo((props) => {
   return (
     <Img
       src={imgPath}
-      alt="プロフィール画像"
+      alt="イメージ画像"
       width="100%"
       minWidth="260px"
       height="200px"

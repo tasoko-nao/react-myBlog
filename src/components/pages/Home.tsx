@@ -3,11 +3,12 @@ import { memo, useContext, VFC } from "react";
 import { PostsContext } from "../../providers/PostsProvider";
 import { PostCard } from "../molecules/PostCard";
 import { HomeCarousel } from "../organisms/HomeCarousel";
-import { Recommend } from "../organisms/layout/Recommend";
+import { Recommend } from "../organisms/Recommend";
 import { Side } from "../organisms/layout/Side";
 
 export const Home: VFC = memo(() => {
   const { posts } = useContext(PostsContext);
+  posts.sort((prev, next) => next.id - prev.id);
 
   return (
     <>

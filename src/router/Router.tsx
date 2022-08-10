@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { Home } from "../components/pages/Home";
 import { Login } from "../components/pages/Login";
 import { Page404 } from "../components/pages/Page404";
-import { PostAdd } from "../components/pages/post/PostAdd";
+import { PostAdd } from "../components/pages/post/PostEdit";
 import { PostCategory } from "../components/pages/PostCategory";
 import { PostDetail } from "../components/pages/PostDetail";
 import { Layout } from "../components/tems/Layout";

@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 export const HomeCarousel = () => {
   const { posts } = useContext(PostsContext);
-  const caroucelPosts = posts.slice(-5);
+  const caroucelPosts = posts.slice(0, 5);
   const { LinkDetail } = useLinkPostDetail();
   const settings = {
     dots: true,
