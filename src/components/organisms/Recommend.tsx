@@ -1,11 +1,11 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { memo, useContext, VFC } from "react";
-import { PostsContext } from "../../providers/PostsProvider";
+import { memo, VFC } from "react";
+import { useGetPosts } from "../../hooks/useGetPosts";
 import { SectionTitle } from "../atoms/SectionTitle";
 import { PostCardMin } from "../molecules/PostCardMin";
 
 export const Recommend: VFC = memo(() => {
-  const { posts } = useContext(PostsContext);
+  const { posts } = useGetPosts();
   const copy = posts.slice();
   const recommendPosts = [...Array(4)].map(
     () => copy.splice(Math.floor(Math.random() * copy.length), 1)[0]

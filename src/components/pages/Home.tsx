@@ -1,41 +1,16 @@
 import { Box, Flex, Stack } from "@chakra-ui/react";
-import { memo, useContext, useEffect, useState, VFC } from "react";
-import { PostsContext } from "../../providers/PostsProvider";
+import { memo, VFC } from "react";
 import { PostCard } from "../molecules/PostCard";
 import { HomeCarousel } from "../organisms/HomeCarousel";
 import { Recommend } from "../organisms/Recommend";
 import { Side } from "../organisms/layout/Side";
 import { SectionTitle } from "../atoms/SectionTitle";
-import db from "../../firebase";
-import { collection, getDocs, Timestamp } from "firebase/firestore";
-
-export type PostType = {
-  id: number;
-  userId: string;
-  title: string;
-  imgPath: string;
-  content: string;
-  created: Timestamp;
-  category: Array<number>;
-};
+import { useGetPosts } from "../../hooks/useGetPosts";
 
 export const Home: VFC = memo(() => {
-  const { posts } = useContext(PostsContext);
-  posts.sort((prev, next) => next.id - prev.id);
-
   // firebase
-  const [dbposts, setDbposts] = useState<Array<PostType>>();
-  useEffect(() => {
-    const postData = collection(db, "posts");
-    getDocs(postData).then((snapShot) => {
-      const docPosts: any = snapShot.docs.map((doc) => ({ ...doc.data() }));
-      setDbposts(docPosts);
-    });
-  }, []);
-  const dayjs = (dayStore: Date) =>
-    `${dayStore.getFullYear()}/${
-      dayStore.getMonth() + 1
-    }/${dayStore.getDate()}`;
+  const { posts } = useGetPosts();
+  posts.sort((prev, next) => next.id - prev.id);
   // --------
 
   return (
@@ -46,11 +21,6 @@ export const Home: VFC = memo(() => {
       <HomeCarousel />
       <Flex direction={{ base: "column", lg: "row" }} gap="20px">
         <Box flex="1">
-          {dbposts?.map((post) => (
-            // <PostCard post={post} key={post.id} />
-            <div key={post.id}>{dayjs(post.created.toDate())}</div>
-          ))}
-
           <SectionTitle>最新記事</SectionTitle>
           <Stack spacing="6">
             {posts.map((post) => (

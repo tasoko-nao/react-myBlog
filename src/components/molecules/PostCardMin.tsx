@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import { memo, VFC } from "react";
-import { PostType } from "../../data/Data";
+import { PostType } from "../../hooks/useGetPosts";
 import { useLinkPostDetail } from "../../hooks/useLinkPostDetail";
 import { PostCardImage } from "../atoms/PostCardImage";
 

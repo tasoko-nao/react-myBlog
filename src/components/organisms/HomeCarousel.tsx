@@ -1,14 +1,13 @@
 import { Box, Img, Text } from "@chakra-ui/react";
-import { useContext } from "react";
 import { useLinkPostDetail } from "../../hooks/useLinkPostDetail";
-import { PostsContext } from "../../providers/PostsProvider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
+import { useGetPosts } from "../../hooks/useGetPosts";
 
 export const HomeCarousel = () => {
-  const { posts } = useContext(PostsContext);
+  const { posts } = useGetPosts();
   const caroucelPosts = posts.slice(0, 5);
   const { LinkDetail } = useLinkPostDetail();
   const settings = {

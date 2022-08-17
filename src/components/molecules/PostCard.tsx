@@ -1,8 +1,9 @@
 import { Flex, Link, Stack, Text } from "@chakra-ui/react";
 import { memo, VFC } from "react";
-import { PostType } from "../../data/Data";
+// import { PostType } from "../../data/Data";
 import { Categories } from "../../data/Data";
 import { UserList } from "../../data/UserData";
+import { PostType } from "../../hooks/useGetPosts";
 import { useLinkPostDetail } from "../../hooks/useLinkPostDetail";
 import { CategoryTag } from "../atoms/CategoryTag";
 import { PostCardImage } from "../atoms/PostCardImage";
@@ -15,6 +16,11 @@ export const PostCard: VFC<Props> = memo((props) => {
   const {
     post: { id, userId, title, imgPath, content, created, category },
   } = props;
+  const dayjs = (dayStore: Date) =>
+    `${dayStore.getFullYear()}/${
+      dayStore.getMonth() + 1
+    }/${dayStore.getDate()}`;
+
   return (
     <Stack border="1px solid gray" borderRadius="10px" overflow="hidden">
       <Text
@@ -45,7 +51,7 @@ export const PostCard: VFC<Props> = memo((props) => {
               return <CategoryTag key={id} categoryName={categoryName} />;
             })}
           </Flex>
-          <Text fontSize="sm">{created}</Text>
+          <Text fontSize="sm">{dayjs(created.toDate())}</Text>
           <Text fontSize="sm">
             {UserList.find((user) => user.id === userId)?.name}
           </Text>

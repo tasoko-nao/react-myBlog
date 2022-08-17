@@ -2,6 +2,7 @@ import { Flex, Img, Stack, Text } from "@chakra-ui/react";
 import { memo, useContext, useEffect, VFC } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { Categories } from "../../data/Data";
+import { useGetPosts } from "../../hooks/useGetPosts";
 import { usePostDelete } from "../../hooks/usePostDelete";
 import { PostsContext } from "../../providers/PostsProvider";
 import { CategoryTag } from "../atoms/CategoryTag";
@@ -14,8 +15,14 @@ export const PostDetail: VFC = memo(() => {
   const history = useHistory();
   const { id } = useParams<StateType>();
   const postId = Number(id);
-  const { posts, loginUser } = useContext(PostsContext);
+  const { loginUser } = useContext(PostsContext);
+  const { posts } = useGetPosts();
   const post = posts.find((e) => e.id === postId);
+
+  const dayjs = (dayStore: Date) =>
+    `${dayStore.getFullYear()}/${
+      dayStore.getMonth() + 1
+    }/${dayStore.getDate()}`;
 
   useEffect(() => window.scroll(0, 0), [id]);
 
@@ -71,7 +78,7 @@ export const PostDetail: VFC = memo(() => {
           return <CategoryTag key={id} categoryName={categoryName} />;
         })}
       </Flex>
-      <Text>投稿日 : {post?.created}</Text>
+      <Text>投稿日 : {post && dayjs(post.created.toDate())}</Text>
       <Text>{post?.content}</Text>
     </Stack>
   );

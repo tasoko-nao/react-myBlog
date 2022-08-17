@@ -1,23 +1,24 @@
 import { Box, Stack, Text } from "@chakra-ui/react";
-import { memo, useContext, useEffect, VFC } from "react";
-import { PostsContext } from "../../providers/PostsProvider";
+import { memo, useEffect, VFC } from "react";
 import { PostCard } from "../molecules/PostCard";
 import { useLocation } from "react-router-dom";
 import { CategoryType } from "../../data/Data";
 import { SectionTitle } from "../atoms/SectionTitle";
+import { useGetPosts } from "../../hooks/useGetPosts";
 
 interface stateType {
   Category: CategoryType;
 }
 
 export const PostCategory: VFC = memo(() => {
-  const { posts } = useContext(PostsContext);
+  const { posts } = useGetPosts();
   const {
     state: { Category },
   } = useLocation<stateType>();
   const filteredPosts = posts.filter((post) => {
     return post.category.includes(Category.id);
   });
+  filteredPosts.sort((prev, next) => next.id - prev.id);
   useEffect(() => window.scroll(0, 0), [Category]);
   return (
     <Box>
