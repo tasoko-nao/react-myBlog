@@ -7,8 +7,9 @@ type Props = {
   children: ReactNode;
 };
 
-export const Layout: VFC<Props> = memo((props) => {
+export const PostsLayout: VFC<Props> = memo((props) => {
   const { children } = props;
+
   return (
     <Flex direction="column" minH="100vh" justify="space-between">
       <Header />

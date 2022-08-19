@@ -6,7 +6,7 @@ import { Page404 } from "../components/pages/Page404";
 import { PostAdd } from "../components/pages/post/PostEdit";
 import { PostCategory } from "../components/pages/PostCategory";
 import { PostDetail } from "../components/pages/PostDetail";
-import { Layout } from "../components/temps/Layout";
+import { PostsLayout } from "../components/temps/PostsLayout";
 import { MultiColumnLayout } from "../components/temps/MultiColumnLayout";
 import { AdminRoute } from "./AdRoute";
 
@@ -15,23 +15,23 @@ export const Router = memo(() => {
     <Switch>
       {/* ルート */}
       <Route exact path="/">
-        <Layout>
+        <PostsLayout>
           <Home />
-        </Layout>
+        </PostsLayout>
       </Route>
 
       {/* ログインページ */}
       <Route path="/login">
-        <Layout>
+        <PostsLayout>
           <Login />
-        </Layout>
+        </PostsLayout>
       </Route>
 
       {/* 新規投稿 */}
       <AdminRoute path="/postAdd">
-        <Layout>
+        <PostsLayout>
           <PostAdd />
-        </Layout>
+        </PostsLayout>
       </AdminRoute>
 
       {/* 投稿詳細 */}
@@ -43,9 +43,9 @@ export const Router = memo(() => {
 
       {/* カテゴリページ */}
       <Route exact path="/postCategory">
-        <MultiColumnLayout>
+        <PostsLayout>
           <PostCategory />
-        </MultiColumnLayout>
+        </PostsLayout>
       </Route>
 
       {/* 404 */}

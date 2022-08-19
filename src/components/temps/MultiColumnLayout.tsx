@@ -14,7 +14,7 @@ export const MultiColumnLayout: VFC<Props> = memo((props) => {
   // console.log("multi render");
   const { children } = props;
   const { posts, getPosts } = useGetPosts();
-  useEffect(() => getPosts(), []);
+  useEffect(() => getPosts(), [getPosts]);
   return (
     <>
       <Header />
