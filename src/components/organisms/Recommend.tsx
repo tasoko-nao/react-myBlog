@@ -1,11 +1,15 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { memo, VFC } from "react";
-import { useGetPosts } from "../../hooks/useGetPosts";
+import { PostType } from "../../hooks/useGetPosts";
 import { SectionTitle } from "../atoms/SectionTitle";
 import { PostCardMin } from "../molecules/PostCardMin";
 
-export const Recommend: VFC = memo(() => {
-  const { posts } = useGetPosts();
+type Props = {
+  posts: Array<PostType>;
+};
+
+export const Recommend: VFC<Props> = memo((props) => {
+  const { posts } = props;
   const copy = posts.slice();
   const recommendPosts = [...Array(4)].map(
     () => copy.splice(Math.floor(Math.random() * copy.length), 1)[0]

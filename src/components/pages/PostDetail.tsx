@@ -1,35 +1,33 @@
 import { Flex, Img, Stack, Text } from "@chakra-ui/react";
 import { memo, useContext, useEffect, VFC } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Categories } from "../../data/Data";
-import { useGetPosts } from "../../hooks/useGetPosts";
+import { PostType } from "../../hooks/useGetPosts";
 import { usePostDelete } from "../../hooks/usePostDelete";
 import { PostsContext } from "../../providers/PostsProvider";
 import { CategoryTag } from "../atoms/CategoryTag";
 
 interface StateType {
-  id: string;
+  post: PostType;
 }
 
 export const PostDetail: VFC = memo(() => {
   const history = useHistory();
-  const { id } = useParams<StateType>();
-  const postId = Number(id);
   const { loginUser } = useContext(PostsContext);
-  const { posts } = useGetPosts();
-  const post = posts.find((e) => e.id === postId);
-
+  const {
+    state: { post },
+  } = useLocation<StateType>();
   const dayjs = (dayStore: Date) =>
     `${dayStore.getFullYear()}/${
       dayStore.getMonth() + 1
     }/${dayStore.getDate()}`;
 
-  useEffect(() => window.scroll(0, 0), [id]);
+  useEffect(() => window.scroll(0, 0), [post]);
 
   // 削除
   const { deletePost } = usePostDelete();
   const onClickDelete = () => {
-    deletePost(postId) && history.push("/");
+    deletePost(post.id) && history.push("/");
   };
   // 編集
   const onClickEdit = () =>

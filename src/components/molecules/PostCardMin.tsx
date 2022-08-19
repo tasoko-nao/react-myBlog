@@ -18,7 +18,7 @@ export const PostCardMin: VFC<Props> = memo((props) => {
       key={post.id}
       borderRadius="10px"
       overflow="hidden"
-      onClick={() => LinkDetail(post.id)}
+      onClick={() => LinkDetail(post)}
       _hover={{ cursor: "pointer" }}
       minWidth="260px"
     >

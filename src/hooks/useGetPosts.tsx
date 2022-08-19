@@ -1,5 +1,5 @@
 import { collection, getDocs, Timestamp } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import db from "../firebase";
 
 export type PostType = {
@@ -14,14 +14,19 @@ export type PostType = {
 
 export const useGetPosts = () => {
   const [posts, setPosts] = useState<Array<PostType>>([]);
-  useEffect(() => {
+  const [loading, setLoading] = useState(false);
+
+  const getPosts = useCallback(() => {
+    setLoading(true);
     const postData = collection(db, "posts");
     getDocs(postData).then((snapShot) => {
       const docPosts: any = snapShot.docs.map((doc) => ({ ...doc.data() }));
       setPosts(docPosts);
       posts.sort((prev, next) => next.id - prev.id);
+      setLoading(false);
     });
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
-  return { posts };
+  return { posts, loading, getPosts };
 };

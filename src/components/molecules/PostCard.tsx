@@ -1,6 +1,5 @@
 import { Flex, Link, Stack, Text } from "@chakra-ui/react";
 import { memo, VFC } from "react";
-// import { PostType } from "../../data/Data";
 import { Categories } from "../../data/Data";
 import { UserList } from "../../data/UserData";
 import { PostType } from "../../hooks/useGetPosts";
@@ -13,9 +12,7 @@ type Props = {
 };
 export const PostCard: VFC<Props> = memo((props) => {
   const { LinkDetail } = useLinkPostDetail();
-  const {
-    post: { id, userId, title, imgPath, content, created, category },
-  } = props;
+  const { post } = props;
   const dayjs = (dayStore: Date) =>
     `${dayStore.getFullYear()}/${
       dayStore.getMonth() + 1
@@ -31,11 +28,11 @@ export const PostCard: VFC<Props> = memo((props) => {
         color="white"
         p="0.5rem"
       >
-        <Link onClick={() => LinkDetail(id)}>{title}</Link>
+        <Link onClick={() => LinkDetail(post)}>{post.title}</Link>
       </Text>
       <Flex padding="1rem" wrap="wrap">
-        <Link flex="1" width="100%" onClick={() => LinkDetail(id)}>
-          <PostCardImage imgPath={imgPath} />
+        <Link flex="1" width="100%" onClick={() => LinkDetail(post)}>
+          <PostCardImage imgPath={post.imgPath} />
         </Link>
         <Stack flex="1" margin="1rem" spacing="4">
           <Text
@@ -43,17 +40,17 @@ export const PostCard: VFC<Props> = memo((props) => {
             overflow="hidden"
             style={{ WebkitBoxOrient: "vertical", WebkitLineClamp: "2" }}
           >
-            {content}
+            {post.content}
           </Text>
           <Flex gap="3" wrap="wrap">
-            {category.map((id) => {
+            {post.category.map((id) => {
               const categoryName = Categories.find((e) => e.id === id)?.name;
               return <CategoryTag key={id} categoryName={categoryName} />;
             })}
           </Flex>
-          <Text fontSize="sm">{dayjs(created.toDate())}</Text>
+          <Text fontSize="sm">{dayjs(post.created.toDate())}</Text>
           <Text fontSize="sm">
-            {UserList.find((user) => user.id === userId)?.name}
+            {UserList.find((user) => user.id === post.userId)?.name}
           </Text>
         </Stack>
       </Flex>

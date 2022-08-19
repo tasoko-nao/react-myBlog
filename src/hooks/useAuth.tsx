@@ -17,7 +17,7 @@ export const useAuth = () => {
         alert("ログインできません");
       }
     },
-    []
+    [history, setLoginUser]
   );
   return { onClickLogin };
 };

@@ -6,10 +6,9 @@ import { Page404 } from "../components/pages/Page404";
 import { PostAdd } from "../components/pages/post/PostEdit";
 import { PostCategory } from "../components/pages/PostCategory";
 import { PostDetail } from "../components/pages/PostDetail";
-import { Layout } from "../components/tems/Layout";
-import { MultiColumnLayout } from "../components/tems/MultiColumnLayout";
+import { Layout } from "../components/temps/Layout";
+import { MultiColumnLayout } from "../components/temps/MultiColumnLayout";
 import { AdminRoute } from "./AdRoute";
-// import { LoginedRoute } from "./LoginedRoute";
 
 export const Router = memo(() => {
   return (

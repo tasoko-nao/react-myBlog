@@ -4,10 +4,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
-import { useGetPosts } from "../../hooks/useGetPosts";
+import { PostType } from "../../hooks/useGetPosts";
+import { VFC } from "react";
 
-export const HomeCarousel = () => {
-  const { posts } = useGetPosts();
+type Props = {
+  posts: Array<PostType>;
+};
+
+export const HomeCarousel: VFC<Props> = (props) => {
+  const { posts } = props;
   const caroucelPosts = posts.slice(0, 5);
   const { LinkDetail } = useLinkPostDetail();
   const settings = {
@@ -40,7 +45,7 @@ export const HomeCarousel = () => {
               pb="0"
               key={post.id}
               cursor="pointer"
-              onClick={() => LinkDetail(post.id)}
+              onClick={() => LinkDetail(post)}
             >
               <Img
                 src={post.imgPath}
