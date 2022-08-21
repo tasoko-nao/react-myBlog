@@ -1,6 +1,8 @@
-import { useCallback, useEffect } from "react";
+import { Timestamp } from "firebase/firestore";
+import { useCallback, useContext, useEffect } from "react";
+import { PostsContext } from "../providers/PostsProvider";
 // import { PostType } from "../data/Data";
-import { useGetPosts } from "./useGetPosts";
+import { PostType, useGetPosts } from "./useGetPosts";
 
 export const usePostSave = () => {
   // const { posts, setPosts, loginUser } = useContext(PostsContext);
@@ -44,6 +46,7 @@ export const usePostSave = () => {
   //   [loginUser, maxPostId, posts, setPosts]
   // );
 
+  const { loginUser } = useContext(PostsContext);
   const { posts, getPosts } = useGetPosts();
   useEffect(() => getPosts(), [getPosts]);
 
@@ -60,6 +63,8 @@ export const usePostSave = () => {
       id: number = maxPostId + 1
     ) => {
       const today = new Date();
+      const created = Timestamp.fromDate(today)
+
       const newPosts = [...posts];
       const updatePost = newPosts.find((post) => post.id === id);
       if (updatePost !== undefined) {
@@ -67,27 +72,26 @@ export const usePostSave = () => {
         updatePost["imgPath"] = imgPath;
         updatePost["content"] = content;
         updatePost["category"] = category;
-        console.log(newPosts + "保存");
+        console.log(newPosts);
         // setPosts(newPosts);
       } else {
-        // const post: PostType = {
-        const post: any = {
+        const post: PostType = {
+          // const post: any = {
           id,
           /* @ts-ignore ページがログイン必須のため */
           userId: loginUser.id,
           title,
           imgPath,
           content,
-          // created: `${today.getFullYear()}/${
-          //   today.getMonth() + 1
-          // }/${today.getDate()}`,
+          created,
           category,
         };
         // setPosts([...posts, post]);
-        console.log(post + "保存");
+        console.log("追加");
+        console.log(post);
       }
     },
-    [maxPostId, posts]
+    [maxPostId, posts, loginUser]
   );
   return { postSave };
 };
