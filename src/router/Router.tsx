@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { Home } from "../components/pages/Home";
 import { Login } from "../components/pages/Login";
 import { Page404 } from "../components/pages/Page404";
-import { PostAdd } from "../components/pages/post/PostEdit";
+import { PostEdit } from "../components/pages/post/PostEdit";
 import { PostCategory } from "../components/pages/PostCategory";
 import { PostDetail } from "../components/pages/PostDetail";
 import { PostsLayout } from "../components/temps/PostsLayout";
@@ -30,7 +30,7 @@ export const Router = memo(() => {
       {/* 新規投稿 */}
       <AdminRoute path="/postAdd">
         <PostsLayout>
-          <PostAdd />
+          <PostEdit />
         </PostsLayout>
       </AdminRoute>
 

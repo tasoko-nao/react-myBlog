@@ -13,8 +13,8 @@ import {
 import { ChangeEvent, memo, useEffect, useMemo, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { Categories } from "../../../data/Data";
-import { usePostSave } from "../../../hooks/usePostSave";
-export const PostAdd = memo(() => {
+import { useGetPosts } from "../../../hooks/useGetPosts";
+export const PostEdit = memo(() => {
   useEffect(() => window.scroll(0, 0), []);
   const [title, setTitle] = useState("");
   const [imgPath, setImgPath] = useState("");
@@ -36,7 +36,8 @@ export const PostAdd = memo(() => {
   const history = useHistory();
   const { state } = useLocation<any>();
   const post = useMemo(() => (state ? state.post : null), [state]);
-  const { postSave } = usePostSave();
+
+  const { savePost } = useGetPosts();
 
   useEffect(() => {
     if (post) {
@@ -44,14 +45,19 @@ export const PostAdd = memo(() => {
       setImgPath(post.imgPath);
       setContent(post.content);
       setCategory(post.category);
+      console.log(post.documentId);
     }
   }, [post]);
+
   // 保存時の処理
-  const onSubmitAddPost = (e: ChangeEvent<HTMLInputElement>) => {
+  async function onSubmitAddPost(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-    postSave(title, imgPath, content, category, post?.id);
+
+    // 追加
+    await savePost(title, imgPath, content, category);
+    console.log("add complete");
     history.push("/");
-  };
+  }
 
   return (
     <Box>

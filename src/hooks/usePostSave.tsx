@@ -63,7 +63,7 @@ export const usePostSave = () => {
       id: number = maxPostId + 1
     ) => {
       const today = new Date();
-      const created = Timestamp.fromDate(today)
+      const created = Timestamp.fromDate(today);
 
       const newPosts = [...posts];
       const updatePost = newPosts.find((post) => post.id === id);
@@ -77,6 +77,7 @@ export const usePostSave = () => {
       } else {
         const post: PostType = {
           // const post: any = {
+          documentId: "test",
           id,
           /* @ts-ignore ページがログイン必須のため */
           userId: loginUser.id,

@@ -2,8 +2,7 @@ import { Flex, Img, Stack, Text } from "@chakra-ui/react";
 import { memo, useContext, useEffect, VFC } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { Categories } from "../../data/Data";
-import { PostType } from "../../hooks/useGetPosts";
-import { usePostDelete } from "../../hooks/usePostDelete";
+import { PostType, useGetPosts } from "../../hooks/useGetPosts";
 import { PostsContext } from "../../providers/PostsProvider";
 import { CategoryTag } from "../atoms/CategoryTag";
 
@@ -25,9 +24,10 @@ export const PostDetail: VFC = memo(() => {
   useEffect(() => window.scroll(0, 0), [post]);
 
   // 削除
-  const { deletePost } = usePostDelete();
+  const { deletePost } = useGetPosts();
   const onClickDelete = () => {
-    deletePost(post.id) && history.push("/");
+    deletePost(post.documentId);
+    history.push("/");
   };
   // 編集
   const onClickEdit = () =>
