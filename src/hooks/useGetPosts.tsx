@@ -5,6 +5,7 @@ import {
   doc,
   getDocs,
   Timestamp,
+  updateDoc,
 } from "firebase/firestore";
 import { useCallback, useContext, useState } from "react";
 import db from "../firebase";
@@ -36,9 +37,8 @@ export const useGetPosts = () => {
   const getPosts = useCallback(() => {
     console.log("getPosts!!");
     setLoading(true);
-    const postData = collection(db, "posts");
-    getDocs(postData).then((snapShot) => {
-      const docPosts: any = snapShot.docs.map((doc) => ({
+    fetchPosts().then((docs) => {
+      const docPosts: any = docs.map((doc) => ({
         documentId: doc.id,
         ...doc.data(),
       }));
@@ -56,37 +56,42 @@ export const useGetPosts = () => {
     }
   }, []);
 
-  // ポストを追加
+  // ポストを保存
   const savePost = useCallback(
     (
+      documentId: string,
       title: string,
       imgPath: string,
       content: string,
       category: Array<number>
     ) => {
       return new Promise((resolve) => {
-        setLoading(true);
-        console.log("promise start");
-        fetchPosts().then((posts) => {
-          const postIds: Array<number> = posts.map((post) => post.data().id);
-          const id = Math.max.apply(null, postIds) + 1;
-          addDoc(collection(db, "posts"), {
-            id,
+        if (documentId === null) {
+          fetchPosts().then((posts) => {
+            const postIds: Array<number> = posts.map((post) => post.data().id);
+            const id = Math.max.apply(null, postIds) + 1;
+            addDoc(collection(db, "posts"), {
+              id,
+              title,
+              imgPath,
+              content,
+              category,
+              userId: loginUser?.id,
+              created: Timestamp.fromDate(new Date()),
+            }).then(() => resolve(""));
+          });
+        } else {
+          const obj = doc(db, "posts", documentId);
+          updateDoc(obj, {
             title,
             imgPath,
             content,
             category,
-            userId: loginUser?.id,
-            created: Timestamp.fromDate(new Date()),
-          });
-          console.log("add doc");
-          resolve("");
-        });
-        setLoading(false);
+          }).then(() => resolve(""));
+        }
       });
     },
     [loginUser]
   );
-
   return { posts, loading, getPosts, savePost, deletePost };
 };

@@ -45,16 +45,14 @@ export const PostEdit = memo(() => {
       setImgPath(post.imgPath);
       setContent(post.content);
       setCategory(post.category);
-      console.log(post.documentId);
     }
   }, [post]);
 
   // 保存時の処理
   async function onSubmitAddPost(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-
-    // 追加
-    await savePost(title, imgPath, content, category);
+    const documentId = post ? post.documentId : null;
+    await savePost(documentId, title, imgPath, content, category);
     console.log("add complete");
     history.push("/");
   }
